@@ -3,18 +3,15 @@
         <h2>Posts</h2>
         <button type="button" name="new-post">New Post</button>
     </div>
-    <div class="posts-wrapper">
-        {{#each posts as |post|}}
+    <div class="post-wrapper">
         <div class="individual-post">
-            <a href="">
-                <h3>
-                    {{post.post_title}}
-                </h3>
-            </a>
+            <h3>
+                <a href="/post/{{post.id}}">{{post.post_title}}</a>
+            </h3>
+            {{!-- <h4>insert user name here</h4> --}}
             <p>
                 {{post.post_text}}
             </p>
         </div>
-        {{/each}}
     </div>
 </div>

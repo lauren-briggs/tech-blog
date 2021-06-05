@@ -53,6 +53,7 @@ button{
     border: solid 1px white;
     padding: 10px;
     width: 100px;
+    color: white;
 }
 input:hover,
 button:hover{
@@ -87,5 +88,22 @@ a:hover{
 }
 
 .individual-post{
-    width: 50vw;
+    border: solid 1px white;
+    border-radius: 5px;
+    margin: 10px 10px;
+    padding: 0px 20px;
+}
+
+.posts-container{
+    width: 90vw;
+    margin: auto;
+}
+
+.card-header{
+    display: flex;
+    justify-content: space-between;
+}
+
+.posts-wrapper{
+    display: flex;
 }
