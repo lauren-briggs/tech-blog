@@ -1,17 +1,25 @@
 <div class="posts-container">
     <div class="card-header">
         <h2>Post</h2>
-        <button> <a href="/">Back</a></button>
+        <button><a href="/">Back</a></button>
     </div>
     <div class="post-wrapper">
         <div class="individual-post">
-            <h3>
-                <a href="/post/{{post.id}}">{{post.post_title}}</a>
-            </h3>
-            {{!-- <h4>insert user name here</h4> --}}
+            <h2>
+                {{post.post_title}}
+            </h2>
+            <h4>posted by: {{post.user.username}}</h4>
             <p>
                 {{post.post_text}}
             </p>
         </div>
+        {{#if post.comments}}
+        <div class="comments-wrapper">
+            <div class="individual-comment">
+                <h4>Comments:</h4>
+                <p>{{post.comments.[0].comment_text}}</p>
+            </div>
+        </div>
+        {{/if}}
     </div>
 </div>

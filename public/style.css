@@ -107,3 +107,11 @@ a:hover{
 .posts-wrapper{
     display: flex;
 }
+
+.comments-wrapper{
+ 
+    border: solid 1px white;
+    border-radius: 5px;
+    margin: 10px 10px;
+    padding: 0px 20px;   
+}
