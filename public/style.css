@@ -1,0 +1,87 @@
+body{
+    font-family: 'Courier New', Courier, monospace;
+    background-color: rgb(49, 126, 129);
+    color: white;
+}
+
+header{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0px 20px;
+}
+
+nav ul{
+    display: flex;
+}
+
+nav li{
+    list-style: none;
+    padding-right: 20px;
+}
+
+section{
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+form{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    width: 40vw;
+}
+
+input,
+button{
+    margin: 10px;
+    font-family: 'Courier New', Courier, monospace;
+    border: none;
+    border-radius: 5px;
+    width: 300px;
+}
+input{
+    padding: 10px 10px;
+    background-color: rgb(148, 189, 190);
+}
+button{
+    background-color: rgb(49, 126, 129);
+    border: solid 1px white;
+    padding: 10px;
+    width: 100px;
+}
+input:hover,
+button:hover{
+    background-color: rgb(214, 234, 235);   
+}
+button:hover{
+    cursor: pointer;
+}
+
+input:focus{
+    background-color: rgb(148, 189, 190);
+    margin: 10px;
+    font-family: 'Courier New', Courier, monospace;
+    border: solid 2px white;
+    border-radius: 5px;
+    outline:none;
+}
+
+input:placeholder-shown{
+    font-family: 'Courier New', Courier, monospace;
+}
+
+a,
+a:visited{
+    color: white;
+    text-decoration: none;
+}
+
+a:hover{
+    color: white;
+    text-decoration: underline;
+}
