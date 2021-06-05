@@ -13,7 +13,22 @@ router.get('/', async (req, res) => {
 
 router.get('/post/:id', async (req, res) => {
     try {
-        const dbSinglePostData = await Post.findByPk(req.params.id).catch((err) => {
+        const dbSinglePostData = await Post.findByPk(req.params.id, {
+            include: [
+                {
+                    model: Comment,
+                    attributes: ['id', 'comment_text', 'user_id', 'post_id'],
+                    include: {
+                        model: User,
+                        attributes: ['username'],
+                    },
+                },
+                {
+                    model: User,
+                    attributes: ['username'],
+                }
+            ],
+        }).catch((err) => {
             res.json(err);
         })
         const post = dbSinglePostData.get({ plain: true });
