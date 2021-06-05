@@ -1,7 +1,14 @@
 const router = require('express').Router();
+const { Post, Comment, User } = require('../models');
+const sequelize = require('../config/connection');
 
-router.get('/', (req, res) => {
-    res.render('main', { layout: 'index' });
+router.get('/', async (req, res) => {
+    const dbPostData = await Post.findAll().catch((err) => {
+        res.json(err);
+    });
+    const posts = dbPostData.map((post) => post.get({ plain: true }));
+    console.log(posts)
+    res.render('main', { posts, layout: 'index' });
 });
 
 router.get('/login', async (req, res) => {
