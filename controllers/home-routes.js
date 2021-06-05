@@ -11,6 +11,19 @@ router.get('/', async (req, res) => {
     res.render('main', { posts, layout: 'index' });
 });
 
+router.get('/post/:id', async (req, res) => {
+    try {
+        const dbSinglePostData = await Post.findByPk(req.params.id).catch((err) => {
+            res.json(err);
+        })
+        const post = dbSinglePostData.get({ plain: true });
+        console.log(post)
+        res.render('post', { post, layout: 'index' });
+    } catch (err) {
+        res.status(500).json(err);
+    };
+});
+
 router.get('/login', async (req, res) => {
     try {
         res.render('login', { layout: 'index' })
