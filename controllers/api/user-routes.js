@@ -4,8 +4,7 @@ const bodyParser = require('body-parser');
 const urlEncodedParser = bodyParser.urlencoded({ extended: false })
 
 // create new user
-router.post('/signup', urlEncodedParser, async (req, res) => {
-    console.log(req.body)
+router.post('/signup', async (req, res) => {
     try {
         const newUser = await User.create({
             username: req.body.username,

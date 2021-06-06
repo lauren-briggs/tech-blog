@@ -2,11 +2,13 @@
     <h2>Sign up</h2>
     <form autocomplete="off" action="/api/users/signup" method="POST" id="signup-form">
         <label for="username">Username</label>
-        <input name="username" type="text" placeholder="username">
+        <input name="username" id="username-signup" type="text" placeholder="username">
         <label for="email">Email</label>
-        <input name="email" type="email" placeholder="email">
+        <input name="email" id="email-signup" type="email" placeholder="email">
         <label for="password">Password</label>
-        <input name="password" type="password" placeholder="password">
-        <button type="submit" name="submit-btn">Sign up</button>
+        <input name="password" id="password-signup" type="password" placeholder="password">
+        <input type="submit" name="submit-btn" id="signup-submit">
     </form>
 </section>
+
+<script src="/signup.js"></script>
