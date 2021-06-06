@@ -6,11 +6,11 @@ A CMS-style blog site, where developers can publish their blog posts and comment
 
 
 TO DO:
-- my user credentials are saved and I am logged into the site
+--- my user credentials are saved and I am logged into the site
 
 - WHEN I revisit the site at a later time and choose to sign in - THEN I am prompted to enter my username and password
 
-- WHEN I am signed in to the site THEN I see navigation links for the homepage, the dashboard, and the option to log out
+--- WHEN I am signed in to the site THEN I see navigation links for the homepage, the dashboard, and the option to log out
 
 - add the date created
 

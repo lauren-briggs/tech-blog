@@ -51,12 +51,6 @@ router.get('/login', async (req, res) => {
         return;
     }
     res.render('login', { layout: 'index' })
-    // try {
-    //     res.render('login', { layout: 'index' })
-
-    // } catch (err) {
-    //     res.status(500).json(err)
-    // }
 });
 
 
