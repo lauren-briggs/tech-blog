@@ -9,7 +9,7 @@ router.get('/', async (req, res) => {
         });
         const posts = dbPostData.map((post) => post.get({ plain: true }));
         console.log(posts)
-        res.render('main', { posts, loggedIn: req.session.loggedIn, layout: 'index' });
+        res.render('home', { posts, loggedIn: req.session.loggedIn, layout: 'index' });
     } catch (err) {
         console.log(err);
         res.status(500).json(err);
@@ -58,6 +58,8 @@ router.get('/login', async (req, res) => {
     //     res.status(500).json(err)
     // }
 });
+
+
 
 router.get('/signup', async (req, res) => {
     try {
