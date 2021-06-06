@@ -3,12 +3,17 @@ const { Post, Comment, User } = require('../models');
 const sequelize = require('../config/connection');
 
 router.get('/', async (req, res) => {
-    const dbPostData = await Post.findAll().catch((err) => {
-        res.json(err);
-    });
-    const posts = dbPostData.map((post) => post.get({ plain: true }));
-    console.log(posts)
-    res.render('main', { posts, layout: 'index' });
+    try {
+        const dbPostData = await Post.findAll().catch((err) => {
+            res.json(err);
+        });
+        const posts = dbPostData.map((post) => post.get({ plain: true }));
+        console.log(posts)
+        res.render('main', { posts, loggedIn: req.session.loggedIn, layout: 'index' });
+    } catch (err) {
+        console.log(err);
+        res.status(500).json(err);
+    }
 });
 
 router.get('/post/:id', async (req, res) => {
@@ -33,19 +38,25 @@ router.get('/post/:id', async (req, res) => {
         })
         const post = dbSinglePostData.get({ plain: true });
         console.log(post)
-        res.render('post', { post, layout: 'index' });
+        res.render('post', { post, loggedIn: req.session.loggedIn, layout: 'index' });
     } catch (err) {
+        console.log(err);
         res.status(500).json(err);
     };
 });
 
 router.get('/login', async (req, res) => {
-    try {
-        res.render('login', { layout: 'index' })
-
-    } catch (err) {
-        res.status(500).json(err)
+    if (req.session.loggedIn) {
+        res.redirect('/');
+        return;
     }
+    res.render('login', { layout: 'index' })
+    // try {
+    //     res.render('login', { layout: 'index' })
+
+    // } catch (err) {
+    //     res.status(500).json(err)
+    // }
 });
 
 router.get('/signup', async (req, res) => {
@@ -60,6 +71,15 @@ router.get('/signup', async (req, res) => {
 router.get('/dashboard', async (req, res) => {
     try {
         res.render('dashboard', { layout: 'index' })
+
+    } catch (err) {
+        res.status(500).json(err)
+    }
+});
+
+router.get('/newpost', async (req, res) => {
+    try {
+        res.render('newpost', { layout: 'index' })
 
     } catch (err) {
         res.status(500).json(err)

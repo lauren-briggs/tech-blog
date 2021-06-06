@@ -1,0 +1,34 @@
+<div class="posts-container">
+    <div class="card-header">
+        <h2>New Post</h2>
+        <button><a href="/">Back</a></button>
+    </div>
+    <section class="individual-post">
+        <form autocomplete="off" id="newpost-form" action="/createpost" method="POST">
+            <label for="title">
+                <h3>Title</h3>
+            </label>
+            <input name="title" type="text" placeholder="Post title">
+            <label for="text">
+                <h3>Text</h3>
+            </label>
+            <input name="text" type="text" placeholder="Post content">
+            <button type="submit" name="submit-btn">Create post</button>
+        </form>
+    </section>
+
+    <div class="posts-wrapper">
+        {{#each posts as |post|}}
+        <div class="individual-post">
+            <a href="/post/{{id}}">
+                <h3>
+                    {{post.post_title}}
+                </h3>
+            </a>
+            <p>
+                {{post.post_text}}
+            </p>
+        </div>
+        {{/each}}
+    </div>
+</div>

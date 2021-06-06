@@ -21,5 +21,16 @@
             </div>
         </div>
         {{/if}}
+        {{#if loggedIn}}
+        <section class="individual-post">
+            <form autocomplete="off" id="comment-form" action="/addcomment" method="POST">
+                <label for="comment">
+                    <h3>Add a comment</h3>
+                </label>
+                <input name="comment" type="text" placeholder="Add a comment">
+                <button type="submit" name="submit-btn">Comment</button>
+            </form>
+        </section>
+        {{/if}}
     </div>
 </div>

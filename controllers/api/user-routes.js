@@ -1,8 +1,10 @@
 const router = require('express').Router();
 const { User } = require('../../models');
+const bodyParser = require('body-parser');
+const urlEncodedParser = bodyParser.urlencoded({ extended: false })
 
 // create new user
-router.post('/', async (req, res) => {
+router.post('/signup', urlEncodedParser, async (req, res) => {
     try {
         const dbUserData = await User.create({
             username: req.body.username,
@@ -21,7 +23,8 @@ router.post('/', async (req, res) => {
 });
 
 // log in
-router.post('/login', async (req, res) => {
+router.post('/login', urlEncodedParser, async (req, res) => {
+    console.log(req.body)
     try {
         const dbUserData = await User.findOne({
             where: {
@@ -39,8 +42,11 @@ router.post('/login', async (req, res) => {
         }
         req.session.save(() => {
             req.session.loggedIn = true;
-            res.status(200).json({ user: dbUserData, message: 'Loggen in!' });
+            res.status(200).json({ user: dbUserData, message: 'Logged in!' });
         });
+        console.log(`Logged in: ${req.session.loggedIn}`);
+        // res.redirect('/');
+        res.render('main', { layout: 'index' });
     } catch (err) {
         console.log(err);
         res.status(500).json(err);

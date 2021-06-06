@@ -20,15 +20,15 @@ nav li{
     padding-right: 20px;
 }
 
-section{
-
+.login-container{
     display: flex;
     justify-content: center;
     align-items: center;
     flex-direction: column;
 }
 
-form{
+#login-form,
+#signup-form{
     display: flex;
     justify-content: center;
     align-items: center;
@@ -113,4 +113,23 @@ a:hover{
     border-radius: 5px;
     margin: 10px 10px;
     padding: 0px 20px;   
+}
+
+#newpost-form{
+    flex-direction: column;
+}
+
+#newpost-form input{
+    width: 95%;
+}
+
+#newpost-form button{
+    width: 97%;
+    margin-bottom: 40px;
+    margin-top: 20px;
+}
+
+#comment-form{
+    flex-direction: row;
+    margin-bottom: 20px;
 }
