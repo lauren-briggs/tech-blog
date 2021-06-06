@@ -39,7 +39,7 @@ User.init(
     {
         hooks: {
             async beforeCreate(newUser) {
-                newUser.password = await bcrypt.hash(newuser.password, 10);
+                newUser.password = await bcrypt.hash(newUser.password, 10);
                 return newUser
             },
         },

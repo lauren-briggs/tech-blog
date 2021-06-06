@@ -5,8 +5,9 @@ const urlEncodedParser = bodyParser.urlencoded({ extended: false })
 
 // create new user
 router.post('/signup', urlEncodedParser, async (req, res) => {
+    console.log(req.body)
     try {
-        const dbUserData = await User.create({
+        const newUser = await User.create({
             username: req.body.username,
             email: req.body.email,
             password: req.body.password,
@@ -14,7 +15,7 @@ router.post('/signup', urlEncodedParser, async (req, res) => {
 
         req.session.save(() => {
             req.session.loggedIn = true;
-            res.status(200).json(dbUserData);
+            res.status(200).json(newUser);
         });
     } catch (err) {
         console.log(err);
