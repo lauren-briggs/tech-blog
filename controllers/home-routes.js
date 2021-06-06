@@ -75,7 +75,7 @@ router.get('/dashboard', async (req, res) => {
 
 router.get('/newpost', async (req, res) => {
     try {
-        res.render('newpost', { layout: 'index' })
+        res.render('newpost', { loggedIn: req.session.loggedIn, layout: 'index' })
 
     } catch (err) {
         res.status(500).json(err)

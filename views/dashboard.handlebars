@@ -1,36 +1,21 @@
 <div class="posts-container">
     <div class="card-header">
-        <h2>Your Dashboard</h2>
-        <button><a href="/">Back</a></button>
+        <h2>Your Posts</h2>
+        <button type="button" name="new-post"><a href="/newpost">New Post</a></button>
+        <button type="button" name="new-post"><a href="/">Back</a></button>
     </div>
-    <div class="post-wrapper">
+    <div class="posts-wrapper">
+        {{#each posts as |post|}}
         <div class="individual-post">
-            <h2>
-                {{post.post_title}}
-            </h2>
-            <h4>posted by: {{post.user.username}}</h4>
+            <a href="/post/{{id}}">
+                <h3>
+                    {{post.post_title}}
+                </h3>
+            </a>
             <p>
                 {{post.post_text}}
             </p>
         </div>
-        {{#if post.comments}}
-        <div class="comments-wrapper">
-            <div class="individual-comment">
-                <h4>Comments:</h4>
-                <p>{{post.comments.[0].comment_text}}</p>
-            </div>
-        </div>
-        {{/if}}
-        {{#if loggedIn}}
-        <section class="individual-post">
-            <form autocomplete="off" id="comment-form" action="/addcomment" method="POST">
-                <label for="comment">
-                    <h3>Add a comment</h3>
-                </label>
-                <input name="comment" type="text" placeholder="Add a comment">
-                <button type="submit" name="submit-btn">Comment</button>
-            </form>
-        </section>
-        {{/if}}
+        {{/each}}
     </div>
 </div>

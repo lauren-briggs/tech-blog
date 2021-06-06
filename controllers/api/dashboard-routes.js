@@ -2,7 +2,7 @@ const router = require('express').Router();
 const { User, Post } = require('../../models');
 
 router.get('/', async (req, res) => {
-    console.log(req)
+    console.log(req.session)
     try {
         const dbUserPostData = await Post.findAll({
             where: {
@@ -15,8 +15,9 @@ router.get('/', async (req, res) => {
             }
         });
         console.log(dbUserPostData);
-        const posts = dbUserPostData.map((post) => gallery.get({ plain: true }));
-        res.render('dashboard', { posts, loggedIn: req.session.loggedIn })
+        const posts = dbUserPostData.map((post) => post.get({ plain: true }));
+        console.log(posts)
+        res.render('dashboard', { posts, loggedIn: req.session.loggedIn, layout: 'index' })
     } catch (err) {
         console.log(err);
         res.status(500).json(err);
