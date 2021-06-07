@@ -106,6 +106,7 @@ a:hover{
 
 .posts-wrapper{
     display: flex;
+    flex-wrap: wrap;
 }
 
 .comments-wrapper{

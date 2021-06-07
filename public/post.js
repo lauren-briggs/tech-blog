@@ -18,7 +18,7 @@ async function handleCreatePost(event) {
             headers: { 'Content-Type': 'application/json' }
         });
         if (response.ok) {
-            document.location.replace('/');
+            document.location.replace('/api/dashboard');
         } else {
             alert(response.statusText);
         }
