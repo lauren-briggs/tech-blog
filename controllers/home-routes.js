@@ -1,7 +1,9 @@
 const router = require('express').Router();
 const { Post, Comment, User } = require('../models');
 const sequelize = require('../config/connection');
+const { findByPk } = require('../models/post');
 
+// Get all posts
 router.get('/', async (req, res) => {
     try {
         const dbPostData = await Post.findAll().catch((err) => {
@@ -16,6 +18,7 @@ router.get('/', async (req, res) => {
     }
 });
 
+// Get one post
 router.get('/post/:id', async (req, res) => {
     try {
         const dbSinglePostData = await Post.findByPk(req.params.id, {
@@ -45,6 +48,7 @@ router.get('/post/:id', async (req, res) => {
     };
 });
 
+// Render log in
 router.get('/login', async (req, res) => {
     if (req.session.loggedIn) {
         res.redirect('/');
@@ -53,8 +57,7 @@ router.get('/login', async (req, res) => {
     res.render('login', { layout: 'index' })
 });
 
-
-
+// Render sign up
 router.get('/signup', async (req, res) => {
     try {
         res.render('signup', { layout: 'index' })
@@ -64,6 +67,7 @@ router.get('/signup', async (req, res) => {
     }
 });
 
+// Render dashboard
 router.get('/dashboard', async (req, res) => {
     try {
         res.render('dashboard', { layout: 'index' })
@@ -73,6 +77,7 @@ router.get('/dashboard', async (req, res) => {
     }
 });
 
+// Render new post
 router.get('/newpost', async (req, res) => {
     try {
         res.render('newpost', { loggedIn: req.session.loggedIn, layout: 'index' })
@@ -81,5 +86,40 @@ router.get('/newpost', async (req, res) => {
         res.status(500).json(err)
     }
 });
+
+// Render update post
+router.get('/update/:id', async (req, res) => {
+    try {
+        const editPost = await Post.findByPk(req.params.id, {
+            attributes: [
+                'id',
+                'post_title',
+                'post_text',
+                'user_id',
+                'created_at'
+            ],
+            include: [
+                {
+                    model: User,
+                    attributes: ['username'],
+                },
+                {
+                    model: Comment,
+                    attributes: ['id', 'comment_text', 'user_id', 'created_at'],
+                    include: {
+                        model: User,
+                        attributes: ['username']
+                    }
+                }
+            ]
+        });
+        res.render('update', { editPost, loggedIn: req.session.loggedIn, layout: 'index' });
+        console.log(editPost);
+        return;
+    } catch (err) {
+        res.status(500).json(err)
+    }
+});
+
 
 module.exports = router;

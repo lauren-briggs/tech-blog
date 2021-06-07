@@ -2,8 +2,6 @@ const router = require('express').Router();
 const { Post } = require('../../models');
 const withAuth = require('../../utils/auth');
 const { route } = require('./user-routes');
-// const bodyParser = require('body-parser');
-// const urlEncodedParser = bodyParser.urlencoded({ extended: false })
 
 // Create new post
 router.post('/', withAuth, async (req, res) => {
@@ -16,6 +14,29 @@ router.post('/', withAuth, async (req, res) => {
             user_id: req.session.user_id,
         });
         res.json(newPost)
+    } catch (err) {
+        console.log(err);
+        res.status(500).json(err);
+    }
+});
+
+// Update a post
+router.put('/:id', withAuth, async (req, res) => {
+    console.log(req.body)
+    try {
+        const updatePost = await Post.update(
+            {
+                post_title: req.body.title,
+                post_text: req.body.text
+            },
+            {
+                where: {
+                    id: req.body.postId
+                }
+            }
+
+        );
+        res.json(updatePost);
     } catch (err) {
         console.log(err);
         res.status(500).json(err);

@@ -13,10 +13,11 @@ router.post('/signup', async (req, res) => {
         });
 
         req.session.save(() => {
-            req.session.user_id = dbUserData.id;
-            req.session.username = dbUserData.username;
+            req.session.user_id = newUser.id;
+            req.session.username = newUser.username;
             req.session.loggedIn = true;
             res.status(200).json(newUser);
+            return;
         });
     } catch (err) {
         console.log(err);
@@ -44,8 +45,8 @@ router.post('/login', (req, res) => {
             req.session.user_id = dbUserData.id;
             req.session.username = dbUserData.username;
             req.session.loggedIn = true;
-
             res.json({ user: dbUserData, message: 'You are now logged in!' });
+            return;
         });
     })
         .catch(err => {
@@ -64,9 +65,6 @@ router.post('/logout', (req, res) => {
         res.status(404).end();
     }
 });
-
-// Dashboard
-
 
 
 module.exports = router;

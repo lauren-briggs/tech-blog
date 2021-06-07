@@ -13,16 +13,20 @@
                 {{post.post_text}}
             </p>
             {{#if loggedIn}}
+            <button><a href="/update/{{post.id}}" id="updateBtn">Update Post</a></button>
             <button><a href="" id="deleteBtn">Delete Post</a></button>
             {{/if}}
         </div>
         {{#if post.comments}}
+        {{#each post.comments as |comment|}}
         <div class="comments-wrapper">
             <div class="individual-comment">
                 <h4>Comments:</h4>
-                <p>{{post.comments.[0].comment_text}}</p>
+                <h5>{{this.user.username}} on {{format_date this.created_at}}</h5>
+                <p>{{this.comment_text}}</p>
             </div>
         </div>
+        {{/each}}
         {{/if}}
         {{#if loggedIn}}
         <section class="individual-post">

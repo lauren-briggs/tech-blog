@@ -1,0 +1,49 @@
+<div class="posts-container">
+    <div class="card-header">
+        <h2>Post</h2>
+        <button><a href="/">Back</a></button>
+    </div>
+    <div class="post-wrapper">
+
+        <form autocomplete="off" id="updatepost-form">
+            <label for="title">
+                <h3>Title</h3>
+                <p>{{editPost.post_title}}</p>
+            </label>
+            <input name="title" id="post-title" type="text" value="{{post_title}}">
+            <label for="text">
+                <h3>Text</h3>
+                {{editPost.post_text}}
+            </label>
+            <input name="text" id="post-text" type="text" value="{{post_text}}">
+            <input type="submit" id="updatebtn" name="submit-btn">
+        </form>
+        <button><a href="" id="deleteBtn">Delete Post</a></button>
+    </div>
+    {{#if post.comments}}
+    {{#each post.comments as |comment|}}
+    <div class="comments-wrapper">
+        <div class="individual-comment">
+            <h4>Comments:</h4>
+            <h5>{{this.user.username}} on {{format_date this.created_at}}</h5>
+            <p>{{this.comment_text}}</p>
+        </div>
+    </div>
+    {{/each}}
+    {{/if}}
+    {{#if loggedIn}}
+    <section class="individual-post">
+        <form autocomplete="off" id="comment-form">
+            <label for="comment">
+                <h3>Add a comment</h3>
+            </label>
+            <input name="comment" type="text" id="comment" placeholder="Add a comment">
+            <button type="submit" name="comment" id="comment-btn">Comment</button>
+        </form>
+    </section>
+    {{/if}}
+</div>
+</div>
+
+<script src="/update.js"></script>
+<script src="/delete.js"></script>
