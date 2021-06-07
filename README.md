@@ -10,7 +10,6 @@ A CMS-style blog site similar to a Wordpress site, where developers can publish 
 
 ## Screenshot
 
-[Deployed Site](https://lauren-briggs.github.io/tech-blog/) 
 [Heroku](https://tech-bloggg.herokuapp.com/) 
 
 ![Screenshot of deployed site](Assets/app-screenshot.png) 
