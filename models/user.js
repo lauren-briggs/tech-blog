@@ -44,7 +44,7 @@ User.init(
             },
         },
         sequelize,
-        timestamps: false,
+        timestamps: true,
         freezeTableName: true,
         // createdAt: 'created_at',
         underscored: true,

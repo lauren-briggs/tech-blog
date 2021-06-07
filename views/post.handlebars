@@ -8,7 +8,7 @@
             <h2>
                 {{post.post_title}}
             </h2>
-            <h4>posted by: {{post.user.username}}</h4>
+            <h4>posted by: {{post.user.username}} on {{format_date post.createdAt}} </h4>
             <p>
                 {{post.post_text}}
             </p>
