@@ -12,6 +12,9 @@
             <p>
                 {{post.post_text}}
             </p>
+            {{#if loggedIn}}
+            <button><a href="" id="deleteBtn">Delete Post</a></button>
+            {{/if}}
         </div>
         {{#if post.comments}}
         <div class="comments-wrapper">
@@ -34,3 +37,5 @@
         {{/if}}
     </div>
 </div>
+
+<script src="/post.js"></script>
