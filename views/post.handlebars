@@ -26,12 +26,12 @@
         {{/if}}
         {{#if loggedIn}}
         <section class="individual-post">
-            <form autocomplete="off" id="comment-form" action="/addcomment" method="POST">
+            <form autocomplete="off" id="comment-form">
                 <label for="comment">
                     <h3>Add a comment</h3>
                 </label>
-                <input name="comment" type="text" placeholder="Add a comment">
-                <button type="submit" name="submit-btn">Comment</button>
+                <input name="comment" type="text" id="comment" placeholder="Add a comment">
+                <button type="submit" name="comment" id="comment-btn">Comment</button>
             </form>
         </section>
         {{/if}}
@@ -39,3 +39,4 @@
 </div>
 
 <script src="/delete.js"></script>
+<script src="/comment.js"></script>

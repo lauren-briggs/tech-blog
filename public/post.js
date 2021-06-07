@@ -25,5 +25,4 @@ async function handleCreatePost(event) {
     }
 }
 
-document.getElementById('post-btn').addEventListener('submit', handleCreatePost);
-
+document.getElementById('post-btn').addEventListener('click', handleCreatePost);
