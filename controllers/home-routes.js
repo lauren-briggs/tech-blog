@@ -1,6 +1,7 @@
 const router = require('express').Router();
 const { Post, Comment, User } = require('../models');
 const sequelize = require('../config/connection');
+const seedAll = require('../seeds/index')
 
 // Get all posts
 router.get('/', async (req, res) => {
@@ -119,6 +120,12 @@ router.get('/update/:id', async (req, res) => {
         res.status(500).json(err)
     }
 });
+
+
+router.get('/seed', (req, res) => {
+    seedAll();
+    res.status(200).json('ok')
+})
 
 
 module.exports = router;
