@@ -3,6 +3,7 @@ async function handleLogin(event) {
 
     const username = document.getElementById('username-login').value.trim();
     const password = document.getElementById('password-login').value.trim();
+    const errorsEl = document.getElementById('errors');
 
     if (username && password) {
         const response = await fetch('/api/users/login', {
@@ -16,7 +17,14 @@ async function handleLogin(event) {
         if (response.ok) {
             document.location.replace('/');
         } else {
-            alert(response.statusText);
+            const body = await response.json();
+            console.log(body)
+            errorsEl.innerHTML = '';
+            let ul = document.createElement('ul');
+            let li = document.createElement('li');
+            li.innerHTML = `${body.message}`
+            ul.appendChild(li);
+            errorsEl.appendChild(ul);
         }
     }
 }
