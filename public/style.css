@@ -134,3 +134,13 @@ a:hover{
     flex-direction: row;
     margin-bottom: 20px;
 }
+
+#errors ul{
+    padding: 10px 0px;
+    margin: 0px;
+}
+
+#errors li{
+    list-style: none;
+    text-align: center;
+}
