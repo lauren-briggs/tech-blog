@@ -5,6 +5,8 @@ async function handleSignup(event) {
     const email = document.getElementById('email-signup').value.trim();
     const password = document.getElementById('password-signup').value.trim();
 
+    const errorsEl = document.getElementById('errors');
+
     if (username && email && password) {
         const response = await fetch('/api/users/signup', {
             method: 'post',
@@ -18,7 +20,15 @@ async function handleSignup(event) {
         if (response.ok) {
             document.location.replace('/');
         } else {
-            alert(response.statusText);
+            const body = await response.json();
+            errorsEl.innerHTML = '';
+            let ul = document.createElement('ul');
+            body.errors.forEach((e) => {
+                let li = document.createElement('li');
+                li.innerHTML = `${e.msg}`
+                ul.appendChild(li);
+            })
+            errorsEl.appendChild(ul);
         }
     }
 }

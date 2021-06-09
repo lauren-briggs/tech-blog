@@ -54,14 +54,14 @@ router.get('/login', async (req, res) => {
         res.redirect('/');
         return;
     }
-    res.render('login', { layout: 'index' })
+    res.render('login', { loggedIn: req.session.loggedIn, layout: 'index' })
 });
 
 // Render sign up
 router.get('/signup', async (req, res) => {
     try {
-        res.render('signup', { layout: 'index' })
-
+        res.render('signup', { loggedIn: req.session.loggedIn, layout: 'index' })
+        return;
     } catch (err) {
         res.status(500).json(err)
     }
@@ -70,8 +70,8 @@ router.get('/signup', async (req, res) => {
 // Render dashboard
 router.get('/dashboard', async (req, res) => {
     try {
-        res.render('dashboard', { layout: 'index' })
-
+        res.render('dashboard', { loggedIn: req.session.loggedIn, layout: 'index' })
+        return;
     } catch (err) {
         res.status(500).json(err)
     }
@@ -80,8 +80,12 @@ router.get('/dashboard', async (req, res) => {
 // Render new post
 router.get('/newpost', async (req, res) => {
     try {
-        res.render('newpost', { loggedIn: req.session.loggedIn, layout: 'index' })
-
+        if (req.session.loggedIn) {
+            res.render('newpost', { loggedIn: req.session.loggedIn, layout: 'index' })
+        } else {
+            res.redirect('/');
+            return;
+        }
     } catch (err) {
         res.status(500).json(err)
     }
@@ -90,32 +94,37 @@ router.get('/newpost', async (req, res) => {
 // Render update post
 router.get('/update/:id', async (req, res) => {
     try {
-        const editPost = await Post.findByPk(req.params.id, {
-            attributes: [
-                'id',
-                'post_title',
-                'post_text',
-                'user_id',
-                'created_at'
-            ],
-            include: [
-                {
-                    model: User,
-                    attributes: ['username'],
-                },
-                {
-                    model: Comment,
-                    attributes: ['id', 'comment_text', 'user_id', 'created_at'],
-                    include: {
+        if (req.session.loggedIn) {
+            const editPost = await Post.findByPk(req.params.id, {
+                attributes: [
+                    'id',
+                    'post_title',
+                    'post_text',
+                    'user_id',
+                    'created_at'
+                ],
+                include: [
+                    {
                         model: User,
-                        attributes: ['username']
+                        attributes: ['username'],
+                    },
+                    {
+                        model: Comment,
+                        attributes: ['id', 'comment_text', 'user_id', 'created_at'],
+                        include: {
+                            model: User,
+                            attributes: ['username']
+                        }
                     }
-                }
-            ]
-        });
-        res.render('update', { editPost, loggedIn: req.session.loggedIn, layout: 'index' });
-        console.log(editPost);
-        return;
+                ]
+            });
+            res.render('update', { editPost, loggedIn: req.session.loggedIn, layout: 'index' });
+            console.log(editPost);
+            return;
+        } else {
+            res.redirect('/')
+            return;
+        }
     } catch (err) {
         res.status(500).json(err)
     }
