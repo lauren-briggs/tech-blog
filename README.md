@@ -34,3 +34,4 @@ SO THAT I can publish articles, blog posts, and my thoughts and opinions
 - Connnect Session Sequelize
 - Heroku
 - Dotenv
+- Express-validator
